@@ -48,3 +48,23 @@ jobs:
           echo "Files built: index.html, style.css, script.js"
           echo "Build directory: build/"
           echo "================================"
+
+      - name: Notify Slack - Success
+        if: success()
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            --data '{"text":"✅ *CI/CD Pipeline Successful*\nProject: DevOps WebApp\nBuild: Passed\nTests/Validation: Passed\nStatus: Ready for deployment"}' \
+            "$SLACK_WEBHOOK_URL"
+
+      - name: Notify Slack - Failure
+        if: failure()
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            --data '{"text":"❌ *CI/CD Pipeline Failed*\nProject: DevOps WebApp\nPlease check the GitHub Actions build logs."}' \
+            "$SLACK_WEBHOOK_URL"
