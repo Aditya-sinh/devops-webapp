@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DevOps Dashboard — CI/CD Pipeline Monitor</title>
+<meta name="description" content="A demo DevOps dashboard visualizing an end-to-end CI/CD pipeline: build, test, deploy, monitor, and ChatOps notifications." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ============ NAVBAR ============ -->
+<header class="navbar">
+  <div class="container navbar__inner">
+    <a href="#top" class="brand">
+      <span class="brand__mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6 3 12l6 6"/><path d="M15 6l6 6-6 6"/></svg>
+      </span>
+      <span class="brand__text">DevOps<span class="brand__accent">Dashboard</span></span>
+    </a>
+
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#top">Home</a>
+      <a href="#pipeline">Pipeline</a>
+      <a href="#about">About</a>
+    </nav>
+
+    <a class="repo-link" href="#" aria-label="View source on GitHub">
+      <svg viewBox="0 0 16 16" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+      <span>Repo</span>
+    </a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="container hero__inner">
+      <p class="eyebrow">Virtual Lab · CI/CD Simulation</p>
+      <h1 class="hero__title">End‑to‑End DevOps Automation</h1>
+      <p class="hero__desc">
+        A live look at a fictional project's delivery pipeline — from commit to production.
+        This dashboard demonstrates continuous integration, automated testing, continuous
+        deployment, and ChatOps notifications, all wired together with GitHub Actions and
+        deployed as a static site.
+      </p>
+
+      <div class="status-pill" role="status">
+        <span class="status-pill__dot" aria-hidden="true"></span>
+        <span>Pipeline Status:</span>
+        <strong>Operational</strong>
+      </div>
+
+      <div class="hero__meta">
+        <span><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0Zm.5 4v4.25l3.25 1.93-.5.87L7.5 9V4h1Z"/></svg> Last run: 4 minutes ago</span>
+        <span><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 0 1 3.5v4.75C1 12.9 4 15.86 8 16c4-.14 7-3.1 7-7.75V3.5L8 0Z"/></svg> main branch · protected</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PIPELINE ============ -->
+  <section class="pipeline" id="pipeline">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Workflow</p>
+        <h2>CI/CD Pipeline</h2>
+        <p class="section-sub">Every push to <code>main</code> runs through five automated stages.</p>
+      </div>
+
+      <ol class="stage-flow" aria-label="Pipeline stages">
+
+        <li class="stage" style="--d:0">
+          <div class="stage__icon">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <div class="stage__status stage__status--ok">Passed</div>
+          <h3 class="stage__title">Code</h3>
+          <p class="stage__desc">Commit pushed to GitHub, triggers the workflow.</p>
+        </li>
+
+        <li class="stage" style="--d:1">
+          <div class="stage__icon">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+          </div>
+          <div class="stage__status stage__status--ok">Passed</div>
+          <h3 class="stage__title">Build</h3>
+          <p class="stage__desc">Dependencies installed, project compiled.</p>
+        </li>
+
+        <li class="stage" style="--d:2">
+          <div class="stage__icon">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </div>
+          <div class="stage__status stage__status--ok">Passed</div>
+          <h3 class="stage__title">Test</h3>
+          <p class="stage__desc">Automated test suite runs against the build.</p>
+        </li>
+
+        <li class="stage" style="--d:3">
+          <div class="stage__icon">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+          </div>
+          <div class="stage__status stage__status--ok">Deployed</div>
+          <h3 class="stage__title">Deploy</h3>
+          <p class="stage__desc">Static site shipped to production hosting.</p>
+        </li>
+
+        <li class="stage" style="--d:4">
+          <div class="stage__icon">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <div class="stage__status stage__status--ok">Healthy</div>
+          <h3 class="stage__title">Monitor</h3>
+          <p class="stage__desc">Uptime and logs watched post-deploy.</p>
+        </li>
+
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ STATS ============ -->
+  <section class="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-card__label">Build Status</span>
+          <span class="stat-card__value stat-card__value--ok">Passed</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-card__label">Tests</span>
+          <span class="stat-card__value stat-card__value--ok">Passed</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-card__label">Deployment</span>
+          <span class="stat-card__value stat-card__value--ok">Successful</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-card__label">Environment</span>
+          <span class="stat-card__value stat-card__value--neutral">Production</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RECENT DEPLOYMENTS ============ -->
+  <section class="deployments">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">History</p>
+        <h2>Recent Deployments</h2>
+        <p class="section-sub">Demo data — for illustration only.</p>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Version</th>
+              <th>Commit</th>
+              <th>Status</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="mono">v1.4.2</td>
+              <td class="mono">a3f9c1e</td>
+              <td><span class="badge badge--ok">Success</span></td>
+              <td>4 min ago</td>
+            </tr>
+            <tr>
+              <td class="mono">v1.4.1</td>
+              <td class="mono">7d2b8a4</td>
+              <td><span class="badge badge--ok">Success</span></td>
+              <td>2 hr ago</td>
+            </tr>
+            <tr>
+              <td class="mono">v1.4.0</td>
+              <td class="mono">e91f0c6</td>
+              <td><span class="badge badge--ok">Success</span></td>
+              <td>1 day ago</td>
+            </tr>
+            <tr>
+              <td class="mono">v1.3.9</td>
+              <td class="mono">4c7a2d1</td>
+              <td><span class="badge badge--warn">Retried</span></td>
+              <td>2 days ago</td>
+            </tr>
+            <tr>
+              <td class="mono">v1.3.8</td>
+              <td class="mono">b0e5f33</td>
+              <td><span class="badge badge--ok">Success</span></td>
+              <td>3 days ago</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHATOPS ============ -->
+  <section class="chatops">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">ChatOps</p>
+        <h2>Slack Notification</h2>
+        <p class="section-sub">The pipeline reports its own results — no one has to go check.</p>
+      </div>
+
+      <div class="slack-card">
+        <div class="slack-card__header">
+          <span class="slack-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="18" height="18"><path fill="#36C5F0" d="M8.5 15.5a2.5 2.5 0 0 1-2.5 2.5 2.5 2.5 0 0 1-2.5-2.5A2.5 2.5 0 0 1 6 13h2.5v2.5Z"/><path fill="#2EB67D" d="M9.5 8.5A2.5 2.5 0 0 1 12 6a2.5 2.5 0 0 1 2.5 2.5V15a2.5 2.5 0 0 1-2.5 2.5A2.5 2.5 0 0 1 9.5 15V8.5Z"/><path fill="#ECB22E" d="M15.5 8.5A2.5 2.5 0 0 1 18 6a2.5 2.5 0 0 1 2.5 2.5A2.5 2.5 0 0 1 18 11h-2.5V8.5Z"/><path fill="#E01E5A" d="M14.5 15.5A2.5 2.5 0 0 1 17 13a2.5 2.5 0 0 1 2.5 2.5A2.5 2.5 0 0 1 17 18a2.5 2.5 0 0 1-2.5-2.5Z"/></svg>
+          </span>
+          <span class="slack-card__channel">#ci-cd-alerts</span>
+          <span class="slack-card__time">just now</span>
+        </div>
+        <div class="slack-card__bot">
+          <strong>PipelineBot</strong> <span class="slack-card__tag">APP</span>
+        </div>
+        <div class="slack-card__body">
+          <p class="slack-card__title">✅ CI/CD Pipeline Successful</p>
+          <ul class="slack-card__list">
+            <li><span class="tick">✔</span> Build completed <span class="mono dim">(42s)</span></li>
+            <li><span class="tick">✔</span> Tests passed <span class="mono dim">(28/28)</span></li>
+            <li><span class="tick">✔</span> Deployment successful <span class="mono dim">(main → production)</span></li>
+          </ul>
+          <p class="slack-card__footer">Triggered by push to <span class="mono">main</span> · Version <span class="mono">v1.4.2</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="about" id="about">
+    <div class="container about__inner">
+      <div class="section-head section-head--left">
+        <p class="eyebrow">About this project</p>
+        <h2>Virtual Lab: DevOps Pipeline Simulation</h2>
+        <p class="section-sub">
+          Built for a college DevOps CI/CD lab, this dashboard is the visual front-end for a
+          pipeline that runs entirely on free, static-friendly tooling.
+        </p>
+      </div>
+
+      <ul class="about-list">
+        <li>
+          <span class="about-list__icon">CI</span>
+          <div><strong>Continuous Integration</strong><p>Every commit is automatically built and tested via GitHub Actions.</p></div>
+        </li>
+        <li>
+          <span class="about-list__icon">CD</span>
+          <div><strong>Continuous Deployment</strong><p>Passing builds are shipped automatically to production hosting.</p></div>
+        </li>
+        <li>
+          <span class="about-list__icon">VC</span>
+          <div><strong>Version Control</strong><p>All source history is tracked and reviewed on GitHub.</p></div>
+        </li>
+        <li>
+          <span class="about-list__icon">CO</span>
+          <div><strong>ChatOps</strong><p>Pipeline results are posted straight to a Slack channel.</p></div>
+        </li>
+        <li>
+          <span class="about-list__icon">CH</span>
+          <div><strong>Cloud-based Static Hosting</strong><p>The site itself is deployed on Netlify/Vercel with zero servers.</p></div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container footer__inner">
+    <p>DevOps Automation Lab · <span id="year"></span></p>
+    <p class="footer__sub">Built with GitHub Actions · CI/CD · Slack ChatOps · Static Hosting</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
